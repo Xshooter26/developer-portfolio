@@ -5,8 +5,8 @@ import emailjs from "emailjs-com";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa";
 
-// Initialize EmailJS with your user ID
-emailjs.init("5PTuFoZdfvfCQqO92");
+
+emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_USER_ID);
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -30,7 +30,7 @@ const Contact = () => {
 
     // Create template parameters matching your EmailJS template variables
     const templateParams = {
-      to_name: "Superbone", // The recipient's name (you)
+      to_name: "Superbone", 
       from_name: formData.from_name,
       from_email: formData.from_email,
       message: formData.message,
@@ -39,8 +39,8 @@ const Contact = () => {
 
     emailjs
       .send(
-        "service_fgs9m45", // Your EmailJS service ID
-        "template_90dgoaw", // Your EmailJS template ID
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, 
         templateParams
       )
       .then(
